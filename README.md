@@ -1,6 +1,8 @@
 # Encode-Solidity-Bootcamp
 Group 1 - Encode Solidity Bootcamp April 2023
 
+Week 1 - Homework
+
 ## 1. Function helloWorld()
 
 View functions do not change the state of the blockchain, they do not consume gas, and are not broadcasted as a transaction.
