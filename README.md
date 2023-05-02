@@ -24,3 +24,5 @@ _Reverted with "Fail with error 'Caller is not the owner'"_
 **txhash:** `0x5cd91a23214bcb1730e004d4c47e9b4f13a59fd516fa540867192d63ef85da49`
 
 _Success_
+
+Week 5 - Pushing successfully after removing .git and .gitattributes
