@@ -74,7 +74,7 @@ function signMessage(signer, message) {
 
 }
 
-function ApiInfo() {
+function Profile() {
 	 	const [data, setData] = useState(null);
 		const [isLoading, setLoading] = useState(false);
 		
@@ -97,4 +97,37 @@ function ApiInfo() {
 			<p>{data.email}</p>
 			</div>
 		);
+}
+
+function RequestTokens() {
+	const { data: signer } = useSigner(); 
+	const [txData, setTxData] = useState(null);
+	const [isLoading, setLoading] = useState(false);
+		
+	if (txData) return (
+		<div>
+			<p>Transaction completed</p>
+			<a></a>
+		</div>
+	)
+
+	if (isLoading) return (
+		<div>
+			<button onClick={() => requestTokens(signer, "signature", setLoading, setTxData)}>Request Tokens</button>
+		</div>
+	)
+}
+
+function requestTokens(signer, signature, setLoading, setTxData) {
+	const requestOptions = {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ address: signer._address, signature: signature })
+	};
+	fetch('http://localhost:3001/request-tokens', requestOptions)
+		.then(response => response.json())
+		.then((data) => {
+			setTxData(data);
+			setLoading(true);
+	});
 }

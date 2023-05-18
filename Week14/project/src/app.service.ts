@@ -9,6 +9,8 @@ export class AppService {
   contract: ethers.Contract;
 
   constructor(private configService: ConfigService) {
+    const apiKey = this.configService.get<string>('INFURA_API_KEY')
+    this.provider = new ethers.providers.InfuraProvider('sepolia', apiKey)
     this.provider = ethers.getDefaultProvider('sepolia')
     this.contract = new ethers.Contract(this.getAddress(), tokenJson.abi, this.provider)
   }
@@ -21,7 +23,7 @@ export class AppService {
   }
 
   getAddress() {
-    const tokenAddress = this.configService.get<string>('TokenAddress');
+    const tokenAddress = this.configService.get<string>('TOKEN_ADDRESS');
     return '0xaaa84599036017e4f44b506510f4847d5b46471d';
   }
 
@@ -41,5 +43,12 @@ export class AppService {
 
   async getReceipt(tx: ethers.providers.TransactionResponse) {
     return await tx.wait();
+  }
+
+  async requetTokens(address: string, signature: string) {
+    const pKey = this.configService.get<string>('PRIVATE_KEY');
+    const wallet = new ethers.Wallet(pKey)
+    const signer = wallet.connect(this.provider)
+    return this.contract.connect(signer).mint(address, ethers.utils.parseUnits("1"))
   }
 }

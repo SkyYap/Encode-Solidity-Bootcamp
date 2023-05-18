@@ -1,6 +1,7 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ethers } from 'ethers';
+import { RequestTokensDto } from './dtos/requestTokens.dto';
 
 @Controller()
 export class AppController {
@@ -35,5 +36,9 @@ export class AppController {
   async getTransactionReceipt(@Query('hash') hash: string) {
     return await this.appService.getTransactionReceipt(hash);
   }
-
+  
+  @Post('request-tokens')
+  requestTokens(@Body() body: RequestTokensDto) {
+    return this.appService.requetTokens(body.address, body.signature);
+  }
 }
