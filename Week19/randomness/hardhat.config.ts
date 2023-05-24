@@ -11,6 +11,11 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 });
 
 const config: HardhatUserConfig = {
+  networks: {
+    hardhat: {
+    hardfork: 'merge',
+    }
+  },
   solidity: "0.8.18",
   paths: { tests: "tests" },
 };
