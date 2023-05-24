@@ -21,16 +21,16 @@ async function main() {
             tossCoin();
             break;
           case 3:
-            // signature();
+            signature();
             break;
           case 4:
-            // sealedSeed();
+            sealedSeed();
             break;
           case 5:
-            // randomSealedSeed();
+            randomSealedSeed();
             break;
           case 6:
-            // randao();
+            randao();
             break;
           default:
             console.log("Invalid");
