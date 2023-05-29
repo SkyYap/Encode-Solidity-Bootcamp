@@ -4,7 +4,7 @@ contract Random {
         view
         returns (uint256 randomNumber)
     {
-        // TODO: get randomness from previous block randao reveal
+        return block.difficulty;
     }
 
     function tossCoin() public view returns (bool heads) {
